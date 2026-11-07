@@ -1,0 +1,171 @@
+---
+title: "EJERCICIOS DE APLICACIÓN EMPRESA CREACIONES JUVENILES"
+author: "GRUPO 3"
+fecha: Semana del 2 al 6 de noviembre
+format: html
+editor: visual
+bibliography: "bibliografia CR.bib"
+notice: |
+  @*
+---
+
+## Ejercicio 1: Límite lateral aplicado a pedidos de uniformes
+
+### Situación
+
+La empresa implementa una nueva línea de producción de uniformes industriales. La cantidad de uniformes producidos por semana (en centenas de unidades) se modela mediante:
+
+donde:
+
+$$ P(T)=\begin{cases} 5t+20,& t<8 \\ 3t+36, & t\geq 8 \end{cases}$$
+
+- P(t) = producción semanal de uniformes.
+
+- t = semanas transcurridas desde la implementación del nuevo proceso.
+
+  Determinar el comportamiento de la producción cuando la empresa se aproxima a la semana 8.
+
+### Solución
+
+# Límite lateral por la izquierda
+
+$$ \lim_{t\to8^-}p(t)=5t+20$$
+
+$$ \lim_{t\to8^-}p(t)=5(8)+20$$
+
+$$ \lim_{t\to8^-}p(t)=40+20$$ $$ \lim_{t\to8^-}p(t)=40$$
+
+# Límite Lateral por la derecha
+
+$$ \lim_{t\to8^+}p(t)=3t+36$$
+
+$$ \lim_{t\to8^+}p(t)=3(8)+36$$
+
+$$ \lim_{t\to8^+}p(t)=24+36$$
+
+$$ \lim_{t\to8^+}p(t)=60$$
+
+# Límite total
+
+$$ \lim_{t\to8^-}p(t)= \lim_{t\to8^+}p(t)$$
+
+$$60=60$$
+
+Por tanto:
+
+$$ \lim_{t\to8}p(t)=60$$
+
+# Análisis
+
+La producción de uniformes de trabajo se aproxima a **6.000 unidades semanales** al llegar a la semana 8. Aunque la empresa cambia su método de fabricación en ese momento, la cantidad producida mantiene una transición estable, sin interrupciones ni caídas en la producción. Esto evidencia una planificación eficiente de los procesos operativos.
+
+```{r}
+t <- seq(0,15,0.1)
+
+P <- ifelse(t < 8,
+            5*t + 20,
+            3*t + 36)
+
+plot(t,P,
+     type="l",
+     lwd=3,
+     col="orange",
+     main="Producción de uniformes industriales",
+     xlab="Semanas",
+     ylab="Centenas de uniformes")
+
+abline(v=8,col="purple",lwd=2,lty=2)
+
+points(8,60,
+       pch=19,
+       col="black",
+       cex=1.5)
+
+grid()
+```
+
+## Análisis de la gráfica
+
+La gráfica muestra dos rectas que se unen exactamente en el punto (8,60). Esto demuestra que los límites laterales son iguales y que la producción no presenta saltos cuando se implementa el nuevo proceso de fabricación.
+
+### Ejercicio 2: Límite al infinito aplicado al crecimiento productivo
+
+La productividad de Creaciones Juveniles está representada por:
+
+$$I(x)=\frac{6x^2+80x+200}{x^2+15x+50}$$
+
+Donde :
+
+- I(x) representa el índice de productividad.
+
+- x representa los meses de operación.
+
+La gerencia desea conocer el comportamiento de la productividad cuando la empresa continúa creciendo durante muchos años.
+
+Se desea determinar la productividad a largo plazo de la empresa.
+
+# Solución
+
+$$\lim_{x\to\infty} \frac{6x^2+80x+200}{x^2+15x+50}$$
+
+Dividimos todo para $$x^2$$:
+
+$$\lim_{x\to\infty} \frac{\frac{6x^2}{x^2}+\frac{80x}{x^2}+\frac{200}{x^2}}{\frac{x^2}{x^2}+\frac{15x}{x^2}+\frac{50}{x^2}}$$
+
+$$\lim_{x\to\infty}\frac{6+\frac{80}{x}+\frac{200}{x^2}}{1+\frac{15}{x}+\frac{50}{x^2}}$$
+
+## Evaluar el límite
+
+Cuando $$x$$ tiende al infinito:
+
+$$\lim_{x\to\infty}\frac{80}{x}\to 0$$
+
+$$\lim_{x\to\infty}\frac{200}{x^2}\to 0$$
+
+$$\lim_{x\to\infty}\frac{15}{x}\to 0$$
+
+$$\lim_{x\to\infty}\frac{50}{x^2}\to 0$$
+
+## Por lo tanto:
+
+$$\lim_{x\to\infty}\frac{6+\frac{80}{x}+\frac{200}{x^2}}{1+\frac{15}{x}+\frac{50}{x^2}}=\frac{6}{1}=6 $$
+
+## Resultado
+
+$$\boxed{\lim_{x\to\infty}\frac{6x^2+80x+200}{x^2+15x+50}=6}$$
+
+# Análisis
+
+El resultado indica que, conforme transcurre el tiempo y Creaciones Juveniles continúa aumentando su producción de uniformes industriales y corporativos, el índice de productividad tiende a estabilizarse en un valor de 6.
+
+Esto significa que la empresa alcanza un nivel máximo de eficiencia productiva. Aunque la producción continúe creciendo, los incrementos en productividad serán cada vez menores, manteniéndose alrededor de dicho valor. Este análisis permite planificar la capacidad operativa, la inversión en maquinaria y la gestión de recursos a largo plazo.
+
+```{r}
+# Valores de x
+x <- seq(1, 100, by = 1)
+
+# Función
+I <- (6*x^2 + 80*x + 200) /
+  (x^2 + 15*x + 50)
+
+# Gráfico
+plot(x, I,
+     type = "l",
+     lwd = 3,
+     col = "darkgreen",
+     main = "Productividad a largo plazo de Creaciones Juveniles",
+     xlab = "Meses de operación",
+     ylab = "Índice de productividad")
+
+# Asíntota horizontal
+abline(h = 6,
+       col = "red",
+       lwd = 2,
+       lty = 2)
+
+grid()
+```
+
+## Análisis de la gráfica
+
+La curva muestra el comportamiento del índice de productividad de Creaciones Juveniles a medida que aumentan los meses de operación. Durante los primeros períodos se observan variaciones importantes; sin embargo, conforme aumenta el tiempo, la curva se aproxima cada vez más a la recta horizontal $$y=6$$La línea roja representa la asíntota horizontal y confirma el valor obtenido mediante el límite al infinito. Esto demuestra que la productividad de la empresa se estabiliza alrededor de 6 unidades de rendimiento, permitiendo prever un comportamiento eficiente y sostenible a largo plazo.[@creacionesjuveniles]
